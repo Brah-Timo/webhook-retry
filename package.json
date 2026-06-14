@@ -1,0 +1,122 @@
+{
+  "name": "webhook-retry",
+  "version": "1.0.0",
+  "description": "Ultra-pro smart webhook retry engine with exponential backoff, dead letter queues, circuit breaker, idempotency, and real-time dashboard",
+  "keywords": [
+    "webhook",
+    "retry",
+    "exponential-backoff",
+    "dead-letter-queue",
+    "circuit-breaker",
+    "stripe",
+    "github",
+    "saas",
+    "typescript",
+    "queue",
+    "resilience",
+    "idempotency",
+    "dashboard"
+  ],
+  "author": "webhook-retry contributors",
+  "license": "MIT",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./middleware/express": {
+      "import": "./dist/esm/middleware/express.js",
+      "require": "./dist/cjs/middleware/express.js",
+      "types": "./dist/types/middleware/express.d.ts"
+    },
+    "./middleware/fastify": {
+      "import": "./dist/esm/middleware/fastify.js",
+      "require": "./dist/cjs/middleware/fastify.js",
+      "types": "./dist/types/middleware/fastify.d.ts"
+    },
+    "./middleware/nextjs": {
+      "import": "./dist/esm/middleware/nextjs.js",
+      "require": "./dist/cjs/middleware/nextjs.js",
+      "types": "./dist/types/middleware/nextjs.d.ts"
+    },
+    "./middleware/hono": {
+      "import": "./dist/esm/middleware/hono.js",
+      "require": "./dist/cjs/middleware/hono.js",
+      "types": "./dist/types/middleware/hono.d.ts"
+    },
+    "./dashboard": {
+      "import": "./dist/esm/dashboard/DashboardServer.js",
+      "require": "./dist/cjs/dashboard/DashboardServer.js",
+      "types": "./dist/types/dashboard/DashboardServer.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.build.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run build && npm test",
+    "example:stripe": "tsx examples/stripe-payment.ts",
+    "example:github": "tsx examples/github-webhook.ts",
+    "example:redis": "tsx examples/with-redis.ts"
+  },
+  "peerDependencies": {
+    "express": ">=4.0.0",
+    "fastify": ">=4.0.0",
+    "hono": ">=4.0.0",
+    "next": ">=13.0.0"
+  },
+  "peerDependenciesMeta": {
+    "express": { "optional": true },
+    "fastify": { "optional": true },
+    "hono": { "optional": true },
+    "next": { "optional": true }
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1"
+  },
+  "optionalDependencies": {
+    "ioredis": "^5.3.2",
+    "pg": "^8.11.5",
+    "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.10",
+    "@types/node": "^20.14.0",
+    "@types/pg": "^8.11.6",
+    "@types/ws": "^8.5.10",
+    "@vitest/coverage-v8": "^1.6.0",
+    "msw": "^2.3.1",
+    "tsx": "^4.15.6",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/webhook-retry.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/webhook-retry/issues"
+  },
+  "homepage": "https://webhook-retry.dev"
+}
